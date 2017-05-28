@@ -12,6 +12,9 @@ class CodeProvider:
     def calculate_and_register_code(self):
         types = self.get_filtered_response_types()
 
+        if not types:
+            raise Exception('Response pool is full, run "manage.py clearpool" to clear it')
+
         code = random.choice(types)
 
         # add new code to DB
