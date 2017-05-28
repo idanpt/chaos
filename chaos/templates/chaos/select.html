@@ -4,7 +4,12 @@
 <form action="{%url 'chaos:set_mode'%}" method="post">
     {% csrf_token %}
     {% for choice in choices %}
-            <input type="radio" name="mode" value="{{choice}}" required/>{{choice}} <br>
+            <input
+                    type="radio"
+                    name="mode"
+                    value="{{choice}}"
+                    required
+            />{{choice}} <br>
     {% endfor %}
     <input type="submit">
 </form>

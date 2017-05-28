@@ -17,7 +17,7 @@ def index(request):
 
 def select(request):
     context = {
-        'current_mode': ModeProvider().get_or_create_mode(),
+        'current_mode': ModeProvider.get_active_mode(),
         'choices': CodeProvider.possible_choices
     }
 

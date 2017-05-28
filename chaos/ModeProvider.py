@@ -5,17 +5,23 @@ from chaos.CodeProvider import CodeProvider
 class ModeProvider:
 
     def set_mode(self, mode):
-        current_mode = self.get_or_create_mode()
-        current_mode.mode = mode
+        # Deactivate current mode
+        current_mode = self.get_active_mode()
+        current_mode.is_active = False
         current_mode.save()
 
+        # Activate new mode
+        new_mode = self.get_by_name(mode)
+        new_mode.is_active = True
+        new_mode.save()
+
+        # Reset codes calculation
         CodeProvider.delete_registered_codes()
 
-    def get_or_create_mode(self):
-        # get mode from DB
-        mode = Chaos.objects.filter()[:1]
-        # Create initial mode if table is empty
-        if not mode:
-            mode.append(Chaos(mode='normal').save())
+    @staticmethod
+    def get_active_mode():
+        return Chaos.objects.filter(is_active=True)[:1].get()
 
-        return mode.get()
+    @staticmethod
+    def get_by_name(mode):
+        return Chaos.objects.filter(mode=mode)[:1].get()
