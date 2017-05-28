@@ -1,18 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from chaos.models import ResponseCode
 from chaos.CodeProvider import CodeProvider
 from chaos.ModeProvider import ModeProvider
 
 
-def index(request):
-    code = CodeProvider().calc_status_code()
-
-    # add new code to DB
-    ResponseCode(code=code).save()
-
-    return HttpResponse(status=code)
+def response(request):
+    return HttpResponse(status=CodeProvider().calculate_and_register_code())
 
 
 def select(request):

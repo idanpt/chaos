@@ -1,8 +1,15 @@
+import os
+
+import sys
+
+from chaos import CodeProvider
 from chaos.models import Chaos
-from chaos.CodeProvider import CodeProvider
+import json
 
 
 class ModeProvider:
+
+    modes_json_path = 'modes.json'
 
     def set_mode(self, mode):
         # Deactivate current mode
@@ -25,3 +32,12 @@ class ModeProvider:
     @staticmethod
     def get_by_name(mode):
         return Chaos.objects.filter(mode=mode)[:1].get()
+
+    def get_percentage_by_code(self, code):
+        options = self.get_mode_options()
+        active_mode = self.get_active_mode()
+
+        return options[str(active_mode)][str(code)]
+
+    def get_mode_options(self):
+        return json.load(open(os.path.join(sys.path[0], 'static/modes.json')))

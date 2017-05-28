@@ -15,4 +15,4 @@ class ResponseCode(models.Model):
     code = models.IntegerField(default=200)
 
     def __str__(self):
-        return self.code
+        return str(self.code)

@@ -5,7 +5,7 @@ from . import views
 app_name = 'chaos'
 urlpatterns = [
     # ex: /chaos/
-    url(r'^$', views.index, name='index'),
+    url(r'^response/$', views.response, name='response'),
     # ex: /chaos/5/
     url(r'^select/', views.select, name='select'),
     # ex: /chaos/5/results/
