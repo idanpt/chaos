@@ -27,7 +27,7 @@ class CodeProvider:
 
         # Remove codes that code__count exceeds percentage limit
         for code, count in aggregation.items():
-            percentage_limit = mode_provider.get_percentage_by_code(code)
+            percentage_limit = mode_provider.get_max_percentage_by_code(code)
 
             if count < percentage_limit:
                 filtered_codes.append(code)

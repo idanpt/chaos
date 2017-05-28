@@ -1,9 +1,8 @@
 import os
-
 import sys
+from django.core.exceptions import ObjectDoesNotExist
 
-from chaos import CodeProvider
-from chaos.models import Chaos
+from chaos.models import Mode
 import json
 
 
@@ -11,33 +10,41 @@ class ModeProvider:
 
     modes_json_path = 'modes.json'
 
-    def set_mode(self, mode):
-        # Deactivate current mode
-        current_mode = self.get_active_mode()
-        current_mode.is_active = False
-        current_mode.save()
+    def activate_mode(self, mode):
 
-        # Activate new mode
-        new_mode = self.get_by_name(mode)
+        self.deactivate_all_modes()
+
+        new_mode = self.get_or_create_by_name(mode)
         new_mode.is_active = True
         new_mode.save()
 
-        # Reset codes calculation
-        CodeProvider.delete_registered_codes()
-
-    @staticmethod
-    def get_active_mode():
-        return Chaos.objects.filter(is_active=True)[:1].get()
-
-    @staticmethod
-    def get_by_name(mode):
-        return Chaos.objects.filter(mode=mode)[:1].get()
-
-    def get_percentage_by_code(self, code):
-        options = self.get_mode_options()
+    def get_max_percentage_by_code(self, code):
+        options = self.get_modes_options()
         active_mode = self.get_active_mode()
 
         return options[str(active_mode)][str(code)]
 
-    def get_mode_options(self):
+    @staticmethod
+    def get_modes_options():
         return json.load(open(os.path.join(sys.path[0], 'static/modes.json')))
+
+    @staticmethod
+    def get_active_mode():
+        try:
+            return Mode.objects.filter(is_active=True)[:1].get()
+        except ObjectDoesNotExist:
+            # No active mode, raise exception
+            raise Exception('No active mode is set. go to /select to activate one')
+
+    @staticmethod
+    def deactivate_all_modes():
+        Mode.objects.all().update(is_active=False)
+
+    @staticmethod
+    def get_or_create_by_name(mode_name):
+        try:
+            mode = Mode.objects.filter(mode=mode_name)[:1].get()
+        except ObjectDoesNotExist:
+            mode = Mode(mode=mode_name, is_active=False).save()
+
+        return mode

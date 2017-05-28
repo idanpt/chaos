@@ -1,7 +1,7 @@
 <html>
 <h2>Select Mode</h2>
 <h4>Active: <b>{{ current_mode }}</b></h4>
-<form action="{%url 'chaos:set_mode'%}" method="post">
+<form action="{%url 'chaos:activate_mode'%}" method="post">
     {% csrf_token %}
     {% for choice in choices %}
             <input

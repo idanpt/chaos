@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Chaos, ResponseCode
+from .models import Mode, ResponseCode
 
-admin.site.register(Chaos)
+admin.site.register(Mode)
 admin.site.register(ResponseCode)

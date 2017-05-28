@@ -9,5 +9,5 @@ urlpatterns = [
     # ex: /chaos/5/
     url(r'^select/', views.select, name='select'),
     # ex: /chaos/5/results/
-    url(r'^set_mode/', views.set_mode, name='set_mode'),
+    url(r'^activate_mode/', views.set_mode, name='activate_mode'),
 ]

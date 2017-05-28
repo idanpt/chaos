@@ -19,5 +19,7 @@ def select(request):
 
 
 def set_mode(request):
-    ModeProvider().set_mode(request.POST['mode'])
+    ModeProvider().activate_mode(request.POST['mode'])
+    CodeProvider.delete_registered_codes()
+
     return HttpResponseRedirect(reverse('chaos:select'))

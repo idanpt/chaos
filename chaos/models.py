@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Chaos(models.Model):
+class Mode(models.Model):
     mode = models.CharField(max_length=200)
     is_active = models.BooleanField()
 
