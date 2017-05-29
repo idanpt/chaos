@@ -1,8 +1,10 @@
-from django.core.management.base import BaseCommand
 from collections import Counter
+
+from django.core.management.base import BaseCommand
 from django.http import HttpResponse
-from chaos.CodeProvider import CodeProvider
-from chaos.ModeProvider import ModeProvider
+
+from chaos.management.CodeProvider import CodeProvider
+from chaos.management.ModeProvider import ModeProvider
 
 
 class Command(BaseCommand):

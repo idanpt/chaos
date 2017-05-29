@@ -1,5 +1,6 @@
 from django.test import TestCase
-from chaos.ModeProvider import ModeProvider
+
+from chaos.management.ModeProvider import ModeProvider
 
 
 class ModeTestCase(TestCase):

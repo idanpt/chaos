@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from chaos.CodeProvider import CodeProvider
+
+from chaos.management.CodeProvider import CodeProvider
 
 
 class Command(BaseCommand):

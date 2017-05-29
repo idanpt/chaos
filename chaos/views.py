@@ -1,8 +1,9 @@
-from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 from django.urls import reverse
-from chaos.CodeProvider import CodeProvider
-from chaos.ModeProvider import ModeProvider
+
+from chaos.management.CodeProvider import CodeProvider
+from chaos.management.ModeProvider import ModeProvider
 
 
 def response(request):

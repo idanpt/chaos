@@ -1,7 +1,9 @@
 import random
+
 from django.db.models import Count
+
+from chaos.management.ModeProvider import ModeProvider
 from chaos.models import ResponseCode
-from chaos.ModeProvider import ModeProvider
 
 
 class CodeProvider:
