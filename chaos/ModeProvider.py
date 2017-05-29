@@ -45,6 +45,7 @@ class ModeProvider:
         try:
             mode = Mode.objects.filter(mode=mode_name)[:1].get()
         except ObjectDoesNotExist:
-            mode = Mode(mode=mode_name, is_active=False).save()
+            mode = Mode(mode=mode_name, is_active=False)
+            mode.save()
 
         return mode

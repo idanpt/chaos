@@ -6,7 +6,12 @@ from chaos.ModeProvider import ModeProvider
 
 
 def response(request):
-    return HttpResponse(status=CodeProvider().calculate_and_register_code())
+    code_provider = CodeProvider()
+    types = code_provider.get_filtered_response_types(
+        code_provider.get_codes_aggregation()
+    )
+
+    return HttpResponse(status=code_provider.calculate_and_register_code(types))
 
 
 def select(request):

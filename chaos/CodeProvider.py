@@ -9,22 +9,18 @@ class CodeProvider:
     possible_choices = ['normal', 'degraded', 'failure']
     response_types = [200, 401, 500]
 
-    def calculate_and_register_code(self):
-        types = self.get_filtered_response_types()
-
-        if not types:
+    def calculate_and_register_code(self, filtered_types):
+        if not filtered_types:
             raise Exception('Response pool is full, run "manage.py clearpool" to clear it')
 
-        code = random.choice(types)
+        code = random.choice(filtered_types)
 
         # add new code to DB
         ResponseCode(code=code).save()
 
         return code
 
-    def get_filtered_response_types(self):
-        aggregation = self.get_codes_aggregation()
-
+    def get_filtered_response_types(self, aggregation):
         mode_provider = ModeProvider()
         filtered_codes = []
 
