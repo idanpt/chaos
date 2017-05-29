@@ -9,6 +9,7 @@
     * `pip install virtualenvwrapper-win`
     * `mkvirtualenv chaos`
     * `workon chaos`
+    * `python manage.py runserver`
     
 For more installation info [click here](https://docs.djangoproject.com/en/1.11/howto/windows/)
 ### Usage:
