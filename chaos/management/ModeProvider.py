@@ -22,6 +22,9 @@ class ModeProvider:
         options = self.get_modes_options()
         active_mode = self.get_active_mode()
 
+        if str(code) not in options[str(active_mode)]:
+            return 0
+
         return options[str(active_mode)][str(code)]
 
     @staticmethod
